@@ -1,158 +1,167 @@
-export default {
-	date: "2018-09-22",
+const config = {
+	dateStr: "2018-09-22",
+	startTimeStr: "09:30"
+	endTimeStr: "17:00"
 	schedule: [
 		{
-			starting: "0930",
+			startingStr: "09:30",
 			turn: "Welcome"
 			phase: "Arrival and registration"
 		},
 		{
-			starting: "1000",
+			startingStr: "10:00",
 			turn: "Briefing",
 			phase: "Welcome and Introductory Briefing"
 		},
 		{
-			starting: "1015",
+			startingStr: "10:15",
 			turn: "Planning",
 			phase: "Planning for turn 1"
 		},
 
 		{
-			starting: "1030",
+			startingStr: "10:30",
 			turn: "Turn 1",
 			phase: "Action Phase"
 		},
 		{
-			starting: "1045",
+			startingStr: "10:45",
 			turn: "Turn 1",
 			phase: "Team Phase"
 		},
 
 		{
-			starting: "1100",
+			startingStr: "11:00",
 			turn: "Turn 2",
 			phase: "Action Phase"
 		},
 		{
-			starting: "1115",
+			startingStr: "11:15",
 			turn: "Turn 2",
 			phase: "Team Phase"
 		},
 
 		{
-			starting: "1130",
+			startingStr: "11:30",
 			turn: "Turn 3",
 			phase: "Action Phase"
 		},
 		{
-			starting: "1145",
+			startingStr: "11:45",
 			turn: "Turn 3",
 			phase: "Team Phase"
 		},
 
 		{
-			starting: "1200",
+			startingStr: "12:00",
 			turn: "Turn 4",
 			phase: "Action Phase"
 		},
 		{
-			starting: "1215",
+			startingStr: "12:15",
 			turn: "Turn 4",
 			phase: "Team Phase"
 		},
 
 		{
-			starting: "1230",
+			startingStr: "12:30",
 			turn: "Turn 5",
 			phase: "Action Phase"
 		},
 		{
-			starting: "1245",
+			startingStr: "12:45",
 			turn: "Turn 5",
 			phase: "Team Phase"
 		},
 
 		{
-			starting: "1300",
+			startingStr: "13:00",
 			turn: "Turn 6",
 			phase: "Action Phase"
 		},
 		{
-			starting: "1315",
+			startingStr: "13:15",
 			turn: "Turn 6",
 			phase: "Team Phase"
 		},
 
 		{
-			starting: "1330",
+			startingStr: "13:30",
 			turn: "Turn 7",
 			phase: "Action Phase"
 		},
 		{
-			starting: "1345",
+			startingStr: "13:45",
 			turn: "Turn 7",
 			phase: "Team Phase"
 		},
 
 		{
-			starting: "1400",
+			startingStr: "14:00",
 			turn: "Turn 8",
 			phase: "Action Phase"
 		},
 		{
-			starting: "1415",
+			startingStr: "14:15",
 			turn: "Turn 8",
 			phase: "Team Phase"
 		},
 
 		{
-			starting: "1430",
+			startingStr: "14:30",
 			turn: "Turn 9",
 			phase: "Action Phase"
 		},
 		{
-			starting: "1445",
+			startingStr: "14:45",
 			turn: "Turn 9",
 			phase: "Team Phase"
 		},
 
 		{
-			starting: "1500",
+			startingStr: "15:00",
 			turn: "Turn 10",
 			phase: "Action Phase"
 		},
 		{
-			starting: "1515",
+			startingStr: "15:15",
 			turn: "Turn 10",
 			phase: "Team Phase"
 		},
 
 		{
-			starting: "1530",
+			startingStr: "15:30",
 			turn: "Turn 11",
 			phase: "Action Phase"
 		},
 		{
-			starting: "1545",
+			startingStr: "15:45",
 			turn: "Turn 11",
 			phase: "Team Phase"
 		},
 
 		{
-			starting: "1600",
+			startingStr: "16:00",
 			turn: "Turn 12",
 			phase: "Action Phase"
 		},
 		{
-			starting: "1615",
+			startingStr: "16:15",
 			turn: "Turn 12",
 			phase: "Team Phase"
 		},
 
 		{
-			starting: "1630",
+			startingStr: "16:30",
 			turn: "Debriefing",
 			phase: "The game is over."
-		},
+		}
 	]
 };
+
+config.date = new Date(config.dateStr);
+config.startTime = new Date(config.startTimeStr);
+config.endTime = new Date(config.endTimeStr);
+for(const period of config.schedule) {
+	period.starting = new Date(`${config.dateStr}T${period.startingStr}`)
+}
