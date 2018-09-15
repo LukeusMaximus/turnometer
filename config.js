@@ -1,11 +1,11 @@
 const config = {
 	dateStr: "2018-09-22",
-	startTimeStr: "09:30"
-	endTimeStr: "17:00"
+	startTimeStr: "09:30",
+	endTimeStr: "17:00",
 	schedule: [
 		{
 			startingStr: "09:30",
-			turn: "Welcome"
+			turn: "Welcome",
 			phase: "Arrival and registration"
 		},
 		{
@@ -160,8 +160,10 @@ const config = {
 };
 
 config.date = new Date(config.dateStr);
-config.startTime = new Date(config.startTimeStr);
-config.endTime = new Date(config.endTimeStr);
+config.startTime = new Date(`${config.dateStr}T${config.startTimeStr}`);
+config.endTime = new Date(`${config.dateStr}T${config.endTimeStr}`);
 for(const period of config.schedule) {
 	period.starting = new Date(`${config.dateStr}T${period.startingStr}`)
 }
+
+export default config;

@@ -1,11 +1,11 @@
-import config from "config.js"
+import config from "./config.js"
 
 const $time = document.querySelector("#time");
 const $turn = document.querySelector("#turn");
 const $phase = document.querySelector("#phase");
 
 function update() {
-	const now = Date.now();
+	const now = new Date();
 	$time.innerText = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
 
 	if(now < config.startTime || now > config.endTime) {
