@@ -36,10 +36,19 @@ function setViewBox($container, rect) {
     viewbox.height = rect.height + 2 * TEXT_EDGE_SPACING;
 }
 
+function roundRectAttributes(rect) {
+    return {
+        x     : Math.ceil(rect.x),
+        y     : Math.ceil(rect.y),
+        width : Math.ceil(rect.width),
+        height: Math.ceil(rect.height)
+    };
+}
+
 function setTimeSVGText(str) {
     $time.textContent = str;
 
-    const bbox = $time.getBBox();
+    const bbox = roundRectAttributes($time.getBBox());
     $timeBacking.setAttribute("d", `
 		M ${bbox.x} ${bbox.y},
 		l ${bbox.width} 0,
@@ -58,13 +67,15 @@ function setTimeSVGText(str) {
 
 function setTurnSVGText(str) {
     $turn.textContent = str;
-    setViewBox($turnContainer, $turn.getBBox());
+
+    const bbox = roundRectAttributes($turn.getBBox());
+    setViewBox($turnContainer, bbox);
 }
 
 function setPhaseSVGText(str) {
     $phase.textContent = str;
 
-    const bbox = $phase.getBBox();
+    const bbox = roundRectAttributes($phase.getBBox());
     $phaseBacking.setAttribute("d", `
 		M ${bbox.x - bbox.height} ${bbox.y},
 		l ${bbox.width + 2 * bbox.height} 0,
@@ -81,7 +92,6 @@ function setPhaseSVGText(str) {
         width : bbox.width + 2 * bbox.height,
         height: bbox.height
     });
-
 }
 
 function update() {
@@ -118,4 +128,5 @@ function update() {
 }
 
 update();
-setInterval(update, 1000);
+
+window.updateIntervalId = setInterval(update, 1000);
