@@ -1,11 +1,19 @@
 <html>
 <head>
 	<title>Turnometer</title>
+
+	<link rel="stylesheet" href="./turnometer.css" />
 </head>
 <body>
-	<p id="time"></p>
-	<p id="turn"></p>
-	<p id="phase"></p>
+	<svg id="time-container">
+		<text id="time"></text>
+	</svg>
+	<svg id="turn-container">
+		<text id="turn"></text>
+	</svg>
+	<svg id="phase-container">
+		<text id="phase"></text>
+	</svg>
 	<script type="module" src="./turnometer.js"></script>
 </body>
 </html>

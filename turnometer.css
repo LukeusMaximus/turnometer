@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    font-family: sans-serif;
+}
+
+body {
+    margin: 0;
+    height: 100%;
+
+    display: grid;
+    grid-template-rows: 1fr auto auto auto 1fr;
+    grid-template-columns: 0.1fr 1fr 0.1fr;
+    grid-template-areas:
+        ". . ."
+        ". time ."
+        ". turn ."
+        ". phase ."
+        ". . .";
+}
+
+#time-container {
+    grid-area: time;
+    width: 30%;
+}
+
+#time {
+    stroke: black;
+}
+
+#turn-container {
+    grid-area: turn;
+    width: 100%;
+}
+
+#turn {
+    stroke: black;
+}
+
+#phase-container {
+    grid-area: phase;
+    width: 60%;
+}
+
+#phase {
+    stroke: black;
+}
