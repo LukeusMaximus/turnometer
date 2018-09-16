@@ -1,10 +1,12 @@
 import config from "./config.js"
 
 const $time = document.querySelector("#time");
+const $timeBacking = document.querySelector("#time-backing");
 const $timeContainer = document.querySelector("#time-container");
 const $turn = document.querySelector("#turn");
 const $turnContainer = document.querySelector("#turn-container");
 const $phase = document.querySelector("#phase");
+const $phaseBacking = document.querySelector("#phase-backing");
 const $phaseContainer = document.querySelector("#phase-container");
 
 function formatCurrentTimeFromDate(date) {
@@ -26,29 +28,73 @@ function formatCurrentTimeFromDate(date) {
 // Sets the text of an SVG element then makes the element fill the SVG container perfectly
 const TEXT_EDGE_SPACING = 1;
 
-function setSVGText($container, $text, str) {
-	$text.textContent = str;
-	const bbox = $text.getBBox();
-	const viewbox = $container.viewBox.baseVal;
-	viewbox.x = bbox.x - TEXT_EDGE_SPACING;
-	viewbox.y = bbox.y - TEXT_EDGE_SPACING;
-	viewbox.width = bbox.width + 2 * TEXT_EDGE_SPACING;
-	viewbox.height = bbox.height + 2 * TEXT_EDGE_SPACING;
+function setViewBox($container, rect) {
+    const viewbox = $container.viewBox.baseVal;
+    viewbox.x = rect.x - TEXT_EDGE_SPACING;
+    viewbox.y = rect.y - TEXT_EDGE_SPACING;
+    viewbox.width = rect.width + 2 * TEXT_EDGE_SPACING;
+    viewbox.height = rect.height + 2 * TEXT_EDGE_SPACING;
+}
+
+function setTimeSVGText(str) {
+	$time.textContent = str;
+
+	const bbox = $time.getBBox();
+	$timeBacking.setAttribute("d", `
+		M ${bbox.x} ${bbox.y},
+		l ${bbox.width} 0,
+		l ${bbox.height} ${bbox.height},
+		l ${-(bbox.width + 2 * bbox.height)} 0,
+		Z
+	`);
+
+	setViewBox($timeContainer, {
+		x: bbox.x - bbox.height,
+		y: bbox.y,
+		width: bbox.width + 2 * bbox.height,
+		height: bbox.height
+	});
+}
+
+function setTurnSVGText(str) {
+    $turn.textContent = str;
+    setViewBox($turnContainer, $turn.getBBox());
+}
+
+function setPhaseSVGText(str) {
+	$phase.textContent = str;
+
+	const bbox = $phase.getBBox();
+    $phaseBacking.setAttribute("d", `
+		M ${bbox.x - bbox.height} ${bbox.y},
+		l ${bbox.width + 2 * bbox.height} 0,
+		l ${-0.5 * bbox.height} ${0.5*bbox.height},
+		l ${0.5 * bbox.height} ${0.5*bbox.height},
+		l ${-(bbox.width + 2 * bbox.height)} 0,
+		l ${0.5 * bbox.height} ${-0.5*bbox.height},
+		Z
+	`);
+
+    setViewBox($phaseContainer, {
+        x: bbox.x - bbox.height,
+        y: bbox.y,
+        width: bbox.width + 2 * bbox.height,
+        height: bbox.height
+    });
+
 }
 
 function update() {
 	const now = new Date();
-    setSVGText($timeContainer, $time, formatCurrentTimeFromDate(now));
+    setTimeSVGText(formatCurrentTimeFromDate(now));
 
-	if(now < config.startTime || now > config.endTime) {
-		setSVGText($turnContainer, $turn, "Game not in progress");
-		setSVGText($phaseContainer, $phase, "We'd love to megagame every day but alas we cannot.");
-	} else {
-		const currentPeriod = config.schedule.find(({starting}) => starting <= now);
-        setSVGText($turnContainer, $turn, currentPeriod.turn);
-        setSVGText($phaseContainer, $phase, currentPeriod.phase);
+    let currentPeriod = config.defaultPeriodConf;
+	if(now > config.startTime && now < config.endTime) {
+		currentPeriod = config.schedule.find(({starting}) => starting <= now);
 	}
+
+    setTurnSVGText(currentPeriod.turn);
+    setPhaseSVGText(currentPeriod.phase);
 }
 
 update();
-setInterval(update, 1000);

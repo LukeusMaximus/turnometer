@@ -25,10 +25,16 @@ body {
 #time-container {
     grid-area: time;
     width: 30%;
+    justify-self: center;
+}
+
+#time-backing {
+    stroke: transparent;
+    fill: black
 }
 
 #time {
-    stroke: black;
+    fill: white;
 }
 
 #turn-container {
@@ -37,14 +43,19 @@ body {
 }
 
 #turn {
-    stroke: black;
+    fill: black;
 }
 
 #phase-container {
     grid-area: phase;
     width: 60%;
+    justify-self: center;
+}
+
+#phase-backing {
+    fill: black;
 }
 
 #phase {
-    stroke: black;
+    fill: white;
 }

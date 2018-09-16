@@ -2,6 +2,10 @@ const config = {
 	dateStr: "2018-09-22",
 	startTimeStr: "09:30",
 	endTimeStr: "17:00",
+    defaultPeriodConf: {
+		turn: "Game not in progress",
+		phase: "We'd megagame every day if we could."
+	},
 	schedule: [
 		{
 			startingStr: "09:30",
@@ -16,7 +20,7 @@ const config = {
 		{
 			startingStr: "10:15",
 			turn: "Planning",
-			phase: "Planning for turn 1"
+			phase: "Plan for the first turn"
 		},
 
 		{
