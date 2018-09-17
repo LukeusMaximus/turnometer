@@ -1,5 +1,5 @@
 const config = {
-	dateStr: "2018-09-17",
+	dateStr: "2018-09-22",
 	startTimeStr: "09:30",
 	endTimeStr: "17:00",
     defaultPeriodConf: {
