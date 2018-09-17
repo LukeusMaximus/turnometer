@@ -130,3 +130,7 @@ function update() {
 update();
 
 window.updateIntervalId = setInterval(update, 1000);
+
+if("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("./sw.js");
+}
